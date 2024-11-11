@@ -34,10 +34,11 @@ def main():
     llm = ChatOpenAI(model_name="gpt-4o", max_tokens=1500)
 
     # 创建总结链
-    chain = load_summarize_chain(llm, chain_type="refine", verbose=True)
+    chain = load_summarize_chain(llm, chain_type="refine", verbose=False)
 
     # 执行总结链，（为了快速演示，只总结前5段）
-    chain.invoke(split_documents[:5])
+    response = chain.invoke(split_documents[:5])
+    print(response)
 
 
 if __name__ == "__main__":
