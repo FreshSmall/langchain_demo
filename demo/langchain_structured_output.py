@@ -45,7 +45,7 @@ def main():
     )
 
     promptValue = prompt.format(user_input="welcom to califonya!")
-    llm_output = llm(promptValue)
+    llm_output = llm.invoke(promptValue)
 
     # 使用解析器进行解析生成的内容
     result = output_parser.parse(llm_output.content)
