@@ -48,8 +48,8 @@ def main():
     llm_output = llm(promptValue)
 
     # 使用解析器进行解析生成的内容
-    output_parser.parse(llm_output)
-
+    result = output_parser.parse(llm_output.content)
+    print(result)
 
 if __name__ == '__main__':
     main()
