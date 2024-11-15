@@ -15,7 +15,7 @@ load_dotenv()
 def main():
     # ssl_context = ssl.create_default_context(cafile=certifi.where())
     # 导入文本
-    loader = UnstructuredFileLoader("/Users/bjhl/PycharmProjects/langchain_demo/demo/data/lg_test.txt")
+    loader = UnstructuredFileLoader("demo/data/lg_test.txt")
     # 将文本转成 Document 对象
     document = loader.load()
     print(f'documents:{len(document)}')
