@@ -1,5 +1,5 @@
 from langchain.prompts import StringPromptTemplate
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 
 import inspect
 
@@ -12,7 +12,7 @@ def get_source_code(function_name):
 class FunctionExplainerPromptTemplate(StringPromptTemplate, BaseModel):
     """A custom prompt template that takes in the function name as input, and formats the prompt template to provide the source code of the function."""
 
-    @validator("input_variables")
+    @field_validator("input_variables")
     def validate_input_variables(cls, v):
         """Validate that the input variables are correct."""
         if len(v) != 1 or "function_name" not in v:
