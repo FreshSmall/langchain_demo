@@ -22,10 +22,20 @@ def main():
     qa = RetrievalQA.from_chain_type(llm=ChatOpenAI(model_name="gpt-4o", max_tokens=1500), chain_type="stuff",
                                      retriever=docsearch.as_retriever(),
                                      return_source_documents=True)
-    # 进行问答
-    result = qa({"query": "《地藏心经》的作者是谁？"})
-    print(result)
-
+    
+    # 定义并执行多个示例问题
+    questions = [
+        "《地藏心经》的作者是谁？",
+        "《地藏心经》的主要内容是什么？",
+        "如何理解《地藏心经》中的核心思想？"
+    ]
+    
+    # 进行问答并打印结果
+    for i, question in enumerate(questions, 1):
+        result = qa({"query": question})
+        print(f"\n问题{i}: {question}")
+        print("回答:", result["result"])
+        print("来源文档:", [doc.metadata["source"] for doc in result["source_documents"]])
 
 if __name__ == '__main__':
     main()
