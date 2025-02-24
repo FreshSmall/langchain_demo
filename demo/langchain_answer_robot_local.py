@@ -5,16 +5,19 @@ from langchain_openai import ChatOpenAI
 from langchain_community.document_loaders import DirectoryLoader
 from langchain.chains import RetrievalQA
 from dotenv import load_dotenv
+import langchain
 import pylibmagic
+langchain.debug = True  # 启用详细调试输出
 
 load_dotenv()
 
 
 def main():
     # 初始化 openai 的 embeddings 对象
+    doc_path = './data'
     embeddings = OpenAIEmbeddings()
     # 从本地向量数据库加载数据
-    docsearch = Chroma(persist_directory="./data", embedding_function=embeddings)
+    docsearch = Chroma(persist_directory=doc_path, embedding_function=embeddings)
     # 创建问答对象
     qa = RetrievalQA.from_chain_type(llm=ChatOpenAI(model_name="gpt-4o", max_tokens=1500), chain_type="stuff",
                                      retriever=docsearch.as_retriever(),
